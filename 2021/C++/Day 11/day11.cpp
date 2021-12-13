@@ -123,18 +123,6 @@ void flash(vector<vector<int>> &data, int row, int col, int &sum){
             flash(data, row-1, col-1, sum);
         }
     }
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
 }
 
 void part1(vector<vector<int>> data){
