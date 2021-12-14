@@ -2,8 +2,10 @@
 #include<vector>
 #include<fstream>
 #include<string>
+#include <chrono>
 
 using namespace std;
+using namespace std::chrono;
 
 vector<int> extractInts(string s){
 
@@ -74,7 +76,7 @@ void flash(vector<vector<int>> &data, int row, int col, int &sum){
         x
          \
     */
-    if(row != data.size()-1 && col != data[row].size()-1 && data[row+1][col+1]!=-1){
+    if(row != data.size() - 1 && col != data[row].size() - 1 && data[row+1][col+1]!=-1){
         data[row+1][col+1]++;
         if(data[row+1][col+1] > 9){
             flash(data, row+1, col+1, sum);
@@ -185,10 +187,12 @@ void part2(vector<vector<int>> data){
         }
     }
 
-    std::cout << "Result of part 2: " << firstSync;
+    std::cout << "Result of part 2: " << firstSync << endl;
 }
 
 int main(){
+
+    auto start = high_resolution_clock::now();
 
     vector<vector<int>> data;
 
@@ -204,5 +208,10 @@ int main(){
 
     part1(data);
     part2(data);
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+
+
+    cout << "Compilation time: " << duration.count() << " microseconds" << endl; 
     
 }
