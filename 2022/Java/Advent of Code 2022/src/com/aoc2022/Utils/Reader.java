@@ -1,3 +1,5 @@
+package com.aoc2022.Utils;
+
 import java.io.*;
 import java.util.ArrayList;
 

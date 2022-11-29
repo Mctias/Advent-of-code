@@ -1,3 +1,6 @@
+package com.aoc2022.Days;
+
+import com.aoc2022.Utils.Reader;
 import java.util.ArrayList;
 
 public class Day1 {
