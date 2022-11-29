@@ -4,18 +4,12 @@ public class Day1 {
     Reader fileReader = new Reader();
     ArrayList<Integer> input = fileReader.lineByLine("day1");
 
-    private int part1 = 0;
-    private  int part2 = 0;
-
     public void printResults(){
-        solvePart1();
-        System.out.println("Day 1a: " + part1);
-        solvePart2();
-        System.out.println("Day 1b: " + part2);
+        System.out.println("Day 1a: " + part1());
+        System.out.println("Day 1b: " + part2());
     }
 
-    public void solvePart1(){
-
+    public Object part1(){
         int numberOfIncreases = 0;
         int lastNumber = Integer.MAX_VALUE;
         for(int i = 0; i < input.size(); i++){
@@ -24,10 +18,10 @@ public class Day1 {
             }
             lastNumber = input.get(i);
         }
-        part1 = numberOfIncreases;
+        return numberOfIncreases;
     }
 
-    public void solvePart2(){
+    public Object part2(){
         int numberOfIncreases = 0;
         ArrayList<Integer> sums = new ArrayList<Integer>();
         for(int i = 0; i < input.size() - 2; i++){
@@ -42,8 +36,6 @@ public class Day1 {
             }
             lastNumber = sums.get(i);
         }
-        part2 = numberOfIncreases;
+        return numberOfIncreases;
     }
-
-
 }
