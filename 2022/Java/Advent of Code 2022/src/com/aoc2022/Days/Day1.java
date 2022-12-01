@@ -1,11 +1,12 @@
 package com.aoc2022.Days;
 
 import com.aoc2022.Utils.Reader;
+import java.util.Collections;
 import java.util.ArrayList;
 
 public class Day1 {
     Reader fileReader = new Reader();
-    ArrayList<Integer> input = fileReader.lineByLine("day1");
+    ArrayList<Integer> input = fileReader.emptyLines("day1");
 
     public void printResults(){
         System.out.println("Day 1a: " + part1());
@@ -13,32 +14,33 @@ public class Day1 {
     }
 
     public Object part1(){
-        int numberOfIncreases = 0;
-        int lastNumber = Integer.MAX_VALUE;
-        for(int i = 0; i < input.size(); i++){
-            if(input.get(i) > lastNumber){
-                numberOfIncreases++;
+        ArrayList<Integer> totalCalories = new ArrayList<Integer>();
+        int temp = 0;
+        for(int i : input){
+            if(i == -1){
+                totalCalories.add(temp);
+                temp = 0;
+                continue;
             }
-            lastNumber = input.get(i);
+            temp += i;
         }
-        return numberOfIncreases;
+        int result = Collections.max(totalCalories);
+        return result;
     }
 
     public Object part2(){
-        int numberOfIncreases = 0;
-        ArrayList<Integer> sums = new ArrayList<Integer>();
-        for(int i = 0; i < input.size() - 2; i++){
-            int tot = input.get(i) + input.get(i + 1) + input.get(i + 2);
-            sums.add(tot);
-        }
-
-        int lastNumber = Integer.MAX_VALUE;
-        for(int i = 0; i < sums.size(); i++){
-            if(sums.get(i) > lastNumber){
-                numberOfIncreases++;
+        ArrayList<Integer> totalCalories = new ArrayList<Integer>();
+        int temp = 0;
+        for(int i : input){
+            if(i == -1){
+                totalCalories.add(temp);
+                temp = 0;
+                continue;
             }
-            lastNumber = sums.get(i);
+            temp += i;
         }
-        return numberOfIncreases;
+        Collections.sort(totalCalories, Collections.reverseOrder());
+        int result = totalCalories.get(0) + totalCalories.get(1) + totalCalories.get(2);
+        return result;
     }
 }
