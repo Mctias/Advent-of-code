@@ -3,7 +3,6 @@ package com.aoc2022.Utils;
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class Reader {
     static final String DATA_PATH = "C:\\Users\\Mattias Persson\\Documents\\Jobb\\AoC\\2022\\Java\\Advent of Code 2022\\data\\";
@@ -12,7 +11,7 @@ public class Reader {
        2
        3
      */
-    public ArrayList<Integer> lineByLine(String day) {
+    public ArrayList<Integer> lineByLineInt(String day) {
         ArrayList<Integer> result = new ArrayList<Integer>();
         try{
             String filePath = DATA_PATH + day + ".txt";
@@ -36,12 +35,42 @@ public class Reader {
         }
         return result;
     }
+    /*
+      Removes whitespace
+      A B
+      C D
+      D E
+    */
+    public ArrayList<String> lineByLineString(String day) {
+        ArrayList<String> result = new ArrayList<String>();
+        try{
+            String filePath = DATA_PATH + day + ".txt";
+            File file = new File(filePath);
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String st;
+
+            while((st = br.readLine()) != null){
+                result.add(st.replaceAll("\\s+",""));
+            }
+            br.close();
+        }
+        catch (FileNotFoundException e){
+            System.out.println("File not found\n" + e);
+        }
+        catch(NumberFormatException e){
+            System.out.println("Failed to format string to number\n" + e);
+        }
+        catch (Exception e) {
+            System.out.println("Something broke :)\n" + e);
+        }
+        return result;
+    }
 
     /*
       1,2,3
      */
     public ArrayList<Integer> commaSeparated(String day) {
-        ArrayList<Integer> result = new ArrayList<Integer>();
+        ArrayList<Integer> result = new ArrayList<>();
         try{
             String filePath = DATA_PATH + day + ".txt";
             File file = new File(filePath);
@@ -53,6 +82,39 @@ public class Reader {
                 for (String s : tokens){
                     result.add(Integer.parseInt(s));
                 }
+            }
+
+            br.close();
+        }
+        catch (FileNotFoundException e){
+            System.out.println("File not found\n" + e);
+        }
+        catch(NumberFormatException e){
+            System.out.println("Failed to format string to number\n" + e);
+        }
+        catch (Exception e) {
+            System.out.println("Something broke :)\n" + e);
+        }
+        return result;
+    }
+    /*
+      1,2,3
+     */
+    public ArrayList<ArrayList<Integer>> commaSeperatedListOfList(String day) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        try{
+            String filePath = DATA_PATH + day + ".txt";
+            File file = new File(filePath);
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String st;
+
+            while((st = br.readLine()) != null){
+                ArrayList<Integer> seq = new ArrayList<>();
+                String[] tokens = st.split(",");
+                for (String s : tokens){
+                    seq.add(Integer.parseInt(s));
+                }
+                result.add(seq);
             }
 
             br.close();
@@ -150,4 +212,41 @@ public class Reader {
         }
         return result;
     }
+
+    /*
+        1-4, 5-6
+        5-7, 9-9
+        0-4, 5-6
+    */
+    public ArrayList<Range> ranges(String day){
+        ArrayList<Range> result = new ArrayList<Range>();
+        try{
+            String filePath = DATA_PATH + day + ".txt";
+            File file = new File(filePath);
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String st;
+
+            while((st = br.readLine()) != null){
+                st = st.replaceAll(",","-");
+                String[] numbers = st.split("-");
+
+                Range r1 = new Range(Integer.parseInt(numbers[0]), Integer.parseInt(numbers[1]));
+                Range r2 = new Range(Integer.parseInt(numbers[2]), Integer.parseInt(numbers[3]));
+                result.add(r1);
+                result.add(r2);
+            }
+            br.close();
+        }
+        catch (FileNotFoundException e){
+            System.out.println("File not found\n" + e);
+        }
+        catch(NumberFormatException e){
+            System.out.println("Failed to format string to number\n" + e);
+        }
+        catch (Exception e) {
+            System.out.println("Something broke :)\n" + e);
+        }
+        return result;
+    }
+
 }
