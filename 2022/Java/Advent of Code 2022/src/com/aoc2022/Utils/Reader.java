@@ -1,7 +1,6 @@
 package com.aoc2022.Utils;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Reader {
@@ -100,7 +99,7 @@ public class Reader {
     /*
       1,2,3
      */
-    public ArrayList<ArrayList<Integer>> commaSeperatedListOfList(String day) {
+    public ArrayList<ArrayList<Integer>> commaSeparatedListOfList(String day) {
         ArrayList<ArrayList<Integer>> result = new ArrayList<>();
         try{
             String filePath = DATA_PATH + day + ".txt";
@@ -199,6 +198,39 @@ public class Reader {
             }
             // Need to add the last one as well
             result.add(segment);
+            br.close();
+        }
+        catch (FileNotFoundException e){
+            System.out.println("File not found\n" + e);
+        }
+        catch(NumberFormatException e){
+            System.out.println("Failed to format string to number\n" + e);
+        }
+        catch (Exception e) {
+            System.out.println("Something broke :)\n" + e);
+        }
+        return result;
+    }
+    public ArrayList<ArrayList<String>> listOfListStrings(String day) {
+        ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+        try{
+            String filePath = DATA_PATH + day + ".txt";
+            File file = new File(filePath);
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String st;
+
+            ArrayList<String> segment = new ArrayList<String>();
+
+            while((st = br.readLine()) != null){
+                String[] arrOfStr = st.split(" ", -1);
+                for(int i = 0; i < arrOfStr.length; i++){
+                    segment.add(arrOfStr[i]);
+                }
+                result.add(new ArrayList<>(segment));
+                segment.clear();
+            }
+            // Need to add the last one as well
+
             br.close();
         }
         catch (FileNotFoundException e){

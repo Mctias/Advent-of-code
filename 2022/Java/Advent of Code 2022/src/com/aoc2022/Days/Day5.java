@@ -8,7 +8,7 @@ import java.util.Stack;
 public class Day5 {
     Reader fileReader = new Reader();
     ArrayList<String> stacksInput = fileReader.lineByLineString("stacks5");
-    ArrayList<ArrayList<Integer>> moves = fileReader.commaSeperatedListOfList("day5");
+    ArrayList<ArrayList<Integer>> moves = fileReader.commaSeparatedListOfList("day5");
 
 
     public void printResults(){

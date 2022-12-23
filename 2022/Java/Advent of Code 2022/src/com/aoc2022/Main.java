@@ -9,5 +9,7 @@ public class Main {
         new Day3().printResults();
         new Day4().printResults();
         new Day5().printResults();
+        new Day6().printResults();
+        new Day7().printResults();
     }
 }
