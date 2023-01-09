@@ -11,8 +11,6 @@ import java.util.Iterator;
 
 public class Day7 {
     Reader fileReader = new Reader();
-    Printer printer = new Printer();
-
 
     ArrayList<ArrayList<String>> input = fileReader.listOfListStrings("day7");
     ArrayList<Integer> folderSizes = new ArrayList<>();
@@ -58,17 +56,17 @@ public class Day7 {
         return total;
     }
 
-    private void findSmallestSizeAboveThreshold(TreeNode currentNode){
+    private void addFolderSizesAboveThreshold(TreeNode currentNode){
 
         if(currentNode.size > 2805968)
             folderSizes.add(currentNode.size);
 
         for(var child : currentNode.children){
-            findSmallestSizeAboveThreshold((TreeNode) child);
+            addFolderSizesAboveThreshold((TreeNode) child);
         }
     }
 
-    public Object part1(){
+    private TreeNode constructTree(){
         TreeNode currentNode = null;
         TreeNode head = null;
 
@@ -106,21 +104,20 @@ public class Day7 {
                 currentNode.addChild(node);
             }
         }
+        return head;
+    }
 
+    TreeNode head = constructTree();
+    public Object part1(){
         calculateFolderSizes(head);
-
         int result = foldersBelowThreshold(head);
-
-
-        findSmallestSizeAboveThreshold(head);
-
-        Collections.sort(folderSizes);
-        System.out.println(folderSizes.get(0));
-
         return result;
     }
 
     public Object part2(){
-        return null;
+        addFolderSizesAboveThreshold(head);
+        Collections.sort(folderSizes);
+        int result = folderSizes.get(0);
+        return result;
     }
 }
