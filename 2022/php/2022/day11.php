@@ -5,7 +5,6 @@ class Day11 extends Solution
     private function format_data()
     {
         $raw_data = $this->data;
-        //print_r($data);
         $data = [];
         $sub_data = [];
 
