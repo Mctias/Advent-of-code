@@ -3,7 +3,7 @@ include __DIR__ . "/../solution.php";
 
 class Day18 extends Solution
 {
-    private function get_n($cube)
+    private function get_neighbours($cube)
     {
         [$x, $y, $z] = $cube;
         $n = [];
@@ -23,7 +23,7 @@ class Day18 extends Solution
         $count = 0;
         foreach ($cubes as $cube)
         {   
-            $neighbours = $this->get_n($cube);
+            $neighbours = $this->get_neighbours($cube);
             foreach($neighbours as $n)
             {
                 if(!in_array($n, $cubes))
@@ -65,6 +65,7 @@ class Day18 extends Solution
         $max_y = 0;
         $min_z = 0;
         $max_z = 0;
+
         foreach ($data as $row)
         {
             [$x, $y, $z] = $row;
@@ -99,7 +100,7 @@ class Day18 extends Solution
 
             array_push($water_points, [$x, $y, $z]);
 
-            $neighbours = $this->get_n([$x, $y, $z]);
+            $neighbours = $this->get_neighbours([$x, $y, $z]);
 
             foreach ($neighbours as [$nx, $ny, $nz])
             {
@@ -117,7 +118,6 @@ class Day18 extends Solution
         }
 
         $lava_points = [];
-        $test = 0;
         foreach (range($min_x, $max_x ) as $nx)
         {
             foreach (range($min_y, $max_y ) as $ny)
@@ -127,7 +127,6 @@ class Day18 extends Solution
                     
                     if (!in_array([$nx, $ny, $nz], $water_points))
                     {
-                        $test++;
                         array_push($lava_points, [$nx, $ny, $nz]);
                     }
                 }
