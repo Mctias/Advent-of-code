@@ -4,10 +4,12 @@ abstract class Solution
     protected $data;
     protected $test_data;
     protected $year;
+    protected $day;
 
     public function __construct($year, $day)
     {
         $this->year = $year;
+        $this->day = $day;
         $this->data = $this->read_data($day);
         $this->test_data = $this->read_test_data($day);
         $this->print_results();
@@ -55,6 +57,7 @@ abstract class Solution
 
     private function print_results()
     { 
+        echo "===== Day " . $this->day . " =====\n"; 
         if(!$this->part1() == null)
         {
             echo "Part 1: ";
