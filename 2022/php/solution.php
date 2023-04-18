@@ -57,18 +57,21 @@ abstract class Solution
 
     private function print_results()
     { 
+        $part1_result = $this->part1();
+        $part2_result = $this->part2();
+
         echo "===== Day " . $this->day . " =====\n"; 
-        if(!$this->part1() == null)
+        if($part1_result != null)
         {
             echo "Part 1: ";
-            print_r($this->part1());
+            print_r($part1_result);
             echo PHP_EOL;
         }
 
-        if(!$this->part2() == null)
+        if($part2_result != null)
         {
             echo "Part 2: ";
-            print_r($this->part2());
+            print_r($part2_result);
         }
     }
 }

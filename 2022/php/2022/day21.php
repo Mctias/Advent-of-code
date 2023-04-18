@@ -13,6 +13,7 @@ class Day21 extends Solution
         {
             preg_match_all('![-+*/]!', $data[$root], $operator);
             $operator = $operator[0][0];
+
             list($left, $right) = explode($operator, $data[$root]);
             $left = trim($left);
             $right = trim($right);
@@ -107,7 +108,6 @@ class Day21 extends Solution
         $formatted_data["root"] = "lccz = pttp";
         $formatted_data["humn"] = "x";
 
-        // Paste this in https://www.mathpapa.com/ :)))
         return  "Paste this to  https://www.mathpapa.com/ :))) ---> " . $this->solve_part_2($formatted_data, "root");
     }
 }
